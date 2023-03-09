@@ -247,7 +247,7 @@ class ShopController extends Controller
             $order = new Order();
             $order->customer_id = Auth::guard('customers')->user()->id;
             $order->date_at = date('Y-m-d H:i:s');
-            $order->total = $request->totalAll;
+
             $order->save();
         }
         $count_product = count($request->product_id);

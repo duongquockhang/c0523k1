@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', Product::class);
+    $this->authorize('viewAny', Product::class);
         $products = Product::with('category')->paginate(3);
         return view('product.index', compact(['products']));
     }
