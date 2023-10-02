@@ -10,7 +10,7 @@ class Customer extends Authenticatable
     use HasFactory;
     protected $table ='customers';
     protected $fillable = [
-        'email', 'password',
+        'email', 'password','phone','name', 'address'
     ];
     protected $hidden = [
         'password', 'remember_token',
@@ -20,11 +20,5 @@ class Customer extends Authenticatable
         return $this->hasMany(Order::class, 'customer_id', 'id');
     }
 
-    public function scopeSearch($query)
-    {
-        if ($key = request()->key) {
-            $query = $query->where('name', 'like', '%' . $key . '%');
-        }
-        return $query;
-    }
+
 }

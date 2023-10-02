@@ -34,7 +34,6 @@ class DatabaseSeeder extends Seeder
                 DB::table('roles')->insert([
                     'name' => $group . '_' . $action,
                     'group_name' => $group,
-
                 ]);
             }
         }

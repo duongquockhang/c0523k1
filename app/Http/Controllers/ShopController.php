@@ -34,9 +34,9 @@ class ShopController extends Controller
     }
     public function register()
     {
-        return view('loginlogout.register');
+        return view('shop.register');
     }
-    public function checkregister(Request $request)
+    public function checkRegister(Request $request)
     {
         $validated = $request->validate([
             'email' => 'required|unique:customers|email',
@@ -54,12 +54,15 @@ class ShopController extends Controller
         $customer->phone = $request->phone;
         $customer->address =  $request->address;
         $customer->email = $request->email;
-        $customer->password = bcrypt($request->password);
+        $customer->password = bcrypt($request->psw);
 
-        if ($request->password == $request->confirmpassword) {
+        if ($request->psw == $request->psw_repeat) {
             $customer->save();
+            dd(1);
             return redirect()->route('shop.index');
         } else {
+            dd(2);
+
             return redirect()->route('shop.index')->with($notification);
         }
     }
@@ -237,7 +240,6 @@ class ShopController extends Controller
             $data->address = $request->address;
             $data->email = $request->email;
             $data->phone = $request->phone;
-            $data->address = $request->address;
 
             if (isset($request->note)) {
                 $data->note = $request->note;

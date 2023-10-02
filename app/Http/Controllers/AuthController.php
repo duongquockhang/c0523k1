@@ -17,7 +17,7 @@ class AuthController extends Controller
             return view('loginadmin.login');
         }
     }
-    public function postLogin(AuthRequest $request)
+    public function postLogin(Request $request)
     {
         $messages = [
             "email.exists" => "Email không đúng",

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoryRequest;
+
 use Illuminate\Support\Facades\DB;
 use App\Models\Category;
 use App\Models\User;
@@ -41,25 +43,29 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        $validated = $request->validate(
-            [
-                'name' => 'required',
-            ],
-            [
-                'name.required' => 'Không được để trống',
-            ]
-            // $.ajax(option)
-            // alertify.success('Cập nhật thành công');
+        // $validated = $request->validate(
+        //     [
+        //         'name' => 'required',
+        //     ],
+        //     [
+        //         'name.required' => 'Không được để trống',
+        //     ]
+        //     // $.ajax(option)
+        //     // alertify.success('Cập nhật thành công');
 
-        );
+        // );
+
         $category = new Category();
         $category->name = $request->name;
+
+        $category->name = $request->name;
+
         $category->save($request->all());
         // alert()->success('Thêm sản phẩm','thành công');
         // return redirect('home');
-        return redirect()->route('category.index')->with('status', 'Thêm danh mục thành công');
+        return redirect()->route('category.index')->with('trangthai', 'Thêm danh mục thành công');
     }
 
     /**

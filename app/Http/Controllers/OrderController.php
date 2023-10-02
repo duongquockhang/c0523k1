@@ -14,17 +14,23 @@ class OrderController extends Controller
     public function index()
     {
         $this->authorize('viewAny', Order::class);
-        $items=Order::get();
+        $items = Order::select('customer_id', DB::raw('MAX(created_at) as last_order'))
+        ->groupBy('customer_id')
+        ->get();
         return view('order.index',compact('items'));
     }
     public function detail($id)
     {
         $this->authorize('view', Order::class);
-        $items=DB::table('orderdetail')
-        ->join('orders','orderdetail.order_id','=','orders.id')
-        ->join('products','orderdetail.product_id','=','products.id')
-        ->select('products.*', 'orderdetail.*','orders.id')
-        ->where('orders.id','=',$id)->get();
+        $items = DB::table('orders')
+        ->join('customers', 'orders.customer_id', '=', 'customers.id')
+        ->join('orderdetail', 'orders.id', '=', 'orderdetail.order_id')
+        ->join('products', 'orderdetail.product_id', '=', 'products.id')
+        ->select('orders.*', 'customers.name as customer_name', 'products.name as product_name', 'products.price as product_price', 'orderdetail.*')
+        ->where('orders.customer_id', '=', $id)
+        ->orderBy('orders.date_at', 'DESC')
+        ->get();
+
         // dd($items);
         return view('order.orderdetail',compact('items'));
     }

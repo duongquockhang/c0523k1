@@ -36,6 +36,7 @@ Route::post('/postlogin', [AuthController::class, 'postlogin'])->name('postlogin
 
 
 Route::prefix('/')->middleware(['auth', 'preventBackHistory'])->group(function () {
+
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     // category=====================
@@ -83,6 +84,8 @@ Route::prefix('/')->middleware(['auth', 'preventBackHistory'])->group(function (
         Route::post('/shoplogout', [ShopController::class, 'logout'])->name('shoplogout');
         Route::post('/order', [ShopController::class, 'order'])->name('order');
     });
+    Route::get('shop/register', [ShopController::class, 'register'])->name('shop.register');
+    Route::post('shop/checkRegister', [ShopController::class, 'checkRegister'])->name('shop.checkRegister');
 
     Route::prefix('order')->group(function () {
         Route::get('/', [OrderController::class, 'index'])->name('order.index');

@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('content')
-    <form action="{{ route('category.store') }}" method='post'>
+   <form action="{{ route('category.store') }}" method='post'>
         @csrf
         <div class="row">
             <div class="col-lg-8 mx-auto">
@@ -28,5 +28,5 @@
                 </div>
             </div>
         </div>
-        <!--end row-->
+         <!--end row-->
     @endsection

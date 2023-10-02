@@ -2,9 +2,9 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            @if (session('status'))
+            @if (session('trangthai'))
                 <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
+                    {{ session('trangthai') }}
                 </div>
             @endif
             <h2 class="offset-4">
@@ -63,3 +63,8 @@
     </div>
     </div>
 @endsection
+
+
+
+
+
